@@ -26,8 +26,8 @@ def retrieve_data(files, names, startPeriod, endPeriod, country):
 #data storage to mysql database
 def store_data(files, names, country, user, passwd):
     #reset database and initiate connection
-    engine = create_engine(f'mysql://{user}:{passwd}@localhost/eu_tour')
-    engine.execute("DROP DATABASE eu_tour")
+    engine = create_engine(f'mysql://{user}:{passwd}@localhost')
+    engine.execute("DROP DATABASE IF EXISTS eu_tour")
     engine.execute("CREATE DATABASE eu_tour")
     engine.execute("USE eu_tour")
     con = engine.connect()
@@ -51,15 +51,10 @@ def extract_csv(files, names, country):
         ot_files[i].to_csv(f'{country.lower()}_{x}.csv', index=False)
 
 #plot data in graphs
-def plot_data(files, names, country):
+def plot_data(files, names, country, startPeriod, endPeriod):
     for x in files:
-        x=pd.DataFrame({"GEO": ['EL'], "2011": [2321765] })
-        x['GEO']=pd.to_datetime(x['GEO'])
-        x.plot(kind='line', x='GEO', y='2011')
-        # x.plot(kind='scatter', x='GEO', y='2011')
-        # plt.show()
-        # x=x.astype(float)
-        # x.plot()
+        x.plot(kind='scatter', x=startPeriod, y=endPeriod)
+        plt.show()
 
 #main function
 def main():
@@ -77,7 +72,7 @@ def main():
     retrieve_data(files, names, startPeriod, endPeriod, country)
     store_data(files, names, country, user, passwd)
     extract_csv(files, names, country)
-    plot_data(files, names, country)
+    plot_data(files, names, country, startPeriod, endPeriod)
     
 
 if __name__ == "__main__":
