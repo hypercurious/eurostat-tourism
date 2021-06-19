@@ -59,13 +59,13 @@ def plot_data(files, names, country, startPeriod, endPeriod):
     ot_files=files[1::2]
     for i,x in enumerate(el_files):
         x=x.set_index('C_RESID')
-        x=x[x.columns[5:9]].astype(float)
+        x=x[x.columns[4:9]].astype(float)
         x.plot.bar(rot=0, title=f'el_{names[i]}')
         plt.savefig(f'el_{names[i]}.png',bbox_inches='tight')
         plt.show()
     for i,x in enumerate(ot_files):
         x=x.set_index('C_RESID')
-        x=x[x.columns[5:9]].astype(float)
+        x=x[x.columns[4:9]].astype(float)
         x.plot.bar(rot=0, title=f'{country.lower()}_{names[i]}.png')
         plt.savefig(f'{country.lower()}_{names[i]}.png',bbox_inches='tight')
         plt.show()
