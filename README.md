@@ -1,2 +1,2 @@
 # eurostat-tourism
-University project on python that processes some eurostat data about tourism, saves them on a mysql database, export the data in csv and creates graphs about them.
+University project in python that processes some Eurostat data on tourism, stores them on a mysql database, exports the data to csv and creates graphs about them.
